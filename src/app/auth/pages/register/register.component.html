@@ -28,7 +28,7 @@
             formControlName="email"
             placeholder="Email"
           />
-          <span class="form-text text-danger" *ngIf="isInvalidField('name')">
+          <span class="form-text text-danger" *ngIf="isInvalidField('email')">
             It must be a valid email.
           </span>
         </div>
@@ -37,7 +37,18 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Username</label>
         <div class="col sm-9">
-          <input type="text" class="form-control" placeholder="Username" />
+          <input
+            type="text"
+            class="form-control"
+            formControlName="username"
+            placeholder="Username"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="isInvalidField('username')"
+          >
+            It must be a valid username.
+          </span>
         </div>
       </div>
 
