@@ -12,26 +12,35 @@ import { ValidatorsService } from 'src/app/shared/validators/validators.service'
   templateUrl: './register.component.html',
 })
 export class RegisterComponent implements OnInit {
-  public registerForm: FormGroup = this.formBuilder.group({
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(this.validatorsService.namePattern),
+  public registerForm: FormGroup = this.formBuilder.group(
+    {
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorsService.namePattern),
+        ],
       ],
-    ],
-    email: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(this.validatorsService.emailPattern),
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(this.validatorsService.emailPattern),
+        ],
       ],
-    ],
-    username: [
-      '',
-      [Validators.required, this.validatorsService.cannotBeSuperman],
-    ],
-  });
+      username: [
+        '',
+        [Validators.required, this.validatorsService.cannotBeSuperman],
+      ],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password2: ['', [Validators.required]],
+    },
+    {
+      validators: [
+        this.validatorsService.areFieldsTheSame('password', 'password2'),
+      ],
+    }
+  );
 
   constructor(
     private formBuilder: FormBuilder,

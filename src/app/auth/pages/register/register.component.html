@@ -55,7 +55,18 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Password</label>
         <div class="col sm-9">
-          <input type="password" class="form-control" placeholder="Password" />
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <span
+            class="form-text text-danger"
+            *ngIf="isInvalidField('password')"
+          >
+            The password must be at least 6 characters long.
+          </span>
         </div>
       </div>
 
@@ -65,8 +76,15 @@
           <input
             type="password"
             class="form-control"
+            formControlName="password2"
             placeholder="Confirm password"
           />
+          <span
+            class="form-text text-danger"
+            *ngIf="isInvalidField('password2')"
+          >
+            Both passwords must be the same.
+          </span>
         </div>
       </div>
 
