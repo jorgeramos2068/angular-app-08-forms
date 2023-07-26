@@ -8,6 +8,12 @@ import { NgForm } from '@angular/forms';
 export class BasicsComponent implements OnInit {
   @ViewChild('productForm') productForm!: NgForm;
 
+  public initialForm = {
+    product: '',
+    price: 0,
+    existence: 0,
+  };
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -30,5 +36,6 @@ export class BasicsComponent implements OnInit {
 
   submitProduct(): void {
     console.log(this.productForm.value);
+    this.productForm.resetForm(this.initialForm);
   }
 }
