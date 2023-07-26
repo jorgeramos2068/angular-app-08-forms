@@ -18,8 +18,15 @@
             name="product"
             placeholder="Product name"
             required
+            minlength="3"
           />
-          <span class="form-text text-danger">
+          <span
+            class="form-text text-danger"
+            *ngIf="
+              productForm.controls.product?.invalid &&
+              productForm.controls.product?.touched
+            "
+          >
             It must be a 3 characters value
           </span>
         </div>
