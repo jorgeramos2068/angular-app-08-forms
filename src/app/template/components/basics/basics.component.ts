@@ -21,9 +21,10 @@ export class BasicsComponent implements OnInit {
 
   validatePrice(): boolean {
     return (
-      (this.productForm?.controls.price?.invalid &&
-        this.productForm?.controls.price?.touched) ||
-      this.productForm?.controls.price?.value < 0
+      this.productForm?.controls.price?.invalid &&
+      this.productForm?.controls.price?.touched &&
+      (!this.productForm?.controls.price?.value ||
+        this.productForm?.controls.price?.value < 0)
     );
   }
 
