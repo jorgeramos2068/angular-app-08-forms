@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { switchMap, tap } from 'rxjs/operators';
+
+import { Country } from '../../interfaces/countries.interface';
 import { CountriesService } from '../../services/countries.service';
 
 @Component({
@@ -9,10 +12,12 @@ import { CountriesService } from '../../services/countries.service';
 export class SelectorPageComponent implements OnInit {
   public countriesForm: FormGroup = this.formBuilder.group({
     region: ['', [Validators.required]],
+    country: ['', [Validators.required]],
   });
 
   // Selectors
   public regions: string[] = [];
+  public countries: Country[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,6 +26,23 @@ export class SelectorPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.regions = this.countriesService.regions;
+
+    // Change of region
+    this.countriesForm
+      .get('region')
+      ?.valueChanges.pipe(
+        tap((_) => {
+          this.countriesForm.get('country')?.reset('');
+        }),
+        switchMap((localRegion) =>
+          this.countriesService.getCountriesByRegion(localRegion)
+        )
+      )
+      .subscribe({
+        next: (localCountries) => {
+          this.countries = localCountries;
+        },
+      });
   }
 
   submit(): void {
