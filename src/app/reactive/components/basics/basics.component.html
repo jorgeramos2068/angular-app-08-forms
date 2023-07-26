@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-12">
-    <form autocomplete="off" [formGroup]="basicsForm">
+    <form autocomplete="off" [formGroup]="basicsForm" (ngSubmit)="submit()">
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Product</label>
         <div class="col-sm-9">
@@ -13,7 +13,7 @@
             placeholder="Product name"
             formControlName="product"
           />
-          <span class="form-text text-danger">
+          <span class="form-text text-danger" *ngIf="isValidField('product')">
             It must be a 3 characters value
           </span>
         </div>
@@ -28,7 +28,7 @@
             placeholder="Product price"
             formControlName="price"
           />
-          <span class="form-text text-danger">
+          <span class="form-text text-danger" *ngIf="isValidField('price')">
             It must be a price greater or equal than zero.
           </span>
         </div>
@@ -43,6 +43,9 @@
             placeholder="Product existence"
             formControlName="existence"
           />
+          <span class="form-text text-danger" *ngIf="isValidField('existence')">
+            It must be an existence greater or equal than zero.
+          </span>
         </div>
       </div>
 
