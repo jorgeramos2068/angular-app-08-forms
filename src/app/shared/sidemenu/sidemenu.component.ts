@@ -13,8 +13,8 @@ export class SidemenuComponent {
   ];
 
   public reactiveMenuItems: MenuItem[] = [
-    { text: 'Basics', path: '/template/basics' },
-    { text: 'Dynamics', path: '/template/dynamics' },
-    { text: 'Switches', path: '/template/switches' },
+    { text: 'Basics', path: '/reactive/basics' },
+    { text: 'Dynamics', path: '/reactive/dynamics' },
+    { text: 'Switches', path: '/reactive/switches' },
   ];
 }

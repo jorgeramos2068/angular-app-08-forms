@@ -1,1 +1,64 @@
-<p>basics works!</p>
+<h2>Template: Basics</h2>
+<hr />
+
+<div class="row">
+  <div class="col-12">
+    <form
+      (ngSubmit)="submitProduct(productForm)"
+      #productForm="ngForm"
+      autocomplete="off"
+    >
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Product</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            ngModel
+            name="product"
+            placeholder="Product name"
+            required
+          />
+          <span class="form-text text-danger">
+            It must be a 3 characters value
+          </span>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Price</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            ngModel
+            name="price"
+            placeholder="Product price"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Product existence</label>
+        <div class="col-sm-9">
+          <input
+            type="number"
+            class="form-control"
+            ngModel
+            name="existence"
+            placeholder="Product existence"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
