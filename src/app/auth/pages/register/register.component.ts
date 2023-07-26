@@ -50,7 +50,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm.reset({
       name: 'Bruce Wayne',
-      email: 'test@test.com',
+      email: 'test1@test.com',
       username: 'batman',
     });
   }
