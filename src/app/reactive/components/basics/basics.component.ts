@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-basics',
   templateUrl: './basics.component.html',
-  styles: [
-  ]
 })
-export class BasicsComponent implements OnInit {
+export class BasicsComponent {
+  public basicsForm: FormGroup = this.formBuilder.group({
+    product: ['My value'],
+    price: [10],
+    existence: [0],
+  });
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private formBuilder: FormBuilder) {}
 }

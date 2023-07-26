@@ -3,11 +3,16 @@
 
 <div class="row">
   <div class="col-12">
-    <form autocomplete="off">
+    <form autocomplete="off" [formGroup]="basicsForm">
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Product</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" placeholder="Product name" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Product name"
+            formControlName="product"
+          />
           <span class="form-text text-danger">
             It must be a 3 characters value
           </span>
@@ -21,6 +26,7 @@
             type="number"
             class="form-control"
             placeholder="Product price"
+            formControlName="price"
           />
           <span class="form-text text-danger">
             It must be a price greater or equal than zero.
@@ -35,6 +41,7 @@
             type="number"
             class="form-control"
             placeholder="Product existence"
+            formControlName="existence"
           />
         </div>
       </div>
@@ -49,3 +56,11 @@
     </form>
   </div>
 </div>
+
+<h3>Form value</h3>
+<pre>{{ basicsForm.value | json }}</pre>
+<br />
+
+<h3>Valid</h3>
+<pre>{{ basicsForm.valid }}</pre>
+<br />
