@@ -1,1 +1,49 @@
-<p>dynamics works!</p>
+<h2>Template: Dynamics</h2>
+<hr />
+
+<form (ngSubmit)="submit()" #dynamicForm="ngForm" autocomplete="off">
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Name</label>
+    <div class="col sm-9">
+      <input
+        class="form-control"
+        name="name"
+        [ngModel]="initialForm.name"
+        placeholder="Name"
+        required
+      />
+      <span class="form-text text-danger" *ngIf="validateName()">
+        This field is mandatory.
+      </span>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Add</label>
+    <div class="col sm-9">
+      <div class="input-group">
+        <input class="form-control" placeholder="Add favorite game" />
+        <button type="button" class="btn btn-outline-primary">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Favorite games</label>
+    <div class="col sm-9">
+      <input class="form-control mb-1" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button
+        type="submit"
+        class="btn btn-primary float-end"
+        [disabled]="dynamicForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
