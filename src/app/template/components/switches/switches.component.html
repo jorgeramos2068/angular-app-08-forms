@@ -1,1 +1,93 @@
-<p>switches works!</p>
+<h2>Template: Switches</h2>
+<hr />
+
+<form #switchesForm="ngForm">
+  <!-- Radios -->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Gender</label>
+    <div class="col-sm-9">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="M"
+          [(ngModel)]="person.gender"
+          name="genderRadio"
+          id="genderRadioMale"
+          required
+        />
+        <label class="form-check-label" for="genderRadioMale">Male</label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="F"
+          [(ngModel)]="person.gender"
+          name="genderRadio"
+          id="genderRadioFemale"
+          required
+        />
+        <label class="form-check-label" for="genderRadioFemale">Female</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Switches -->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Notifications</label>
+    <div class="col-sm-9">
+      <div class="form-check form-switch mt-2">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="showNotifications"
+          name="showNotifications"
+          [(ngModel)]="person.showNotifications"
+        />
+        <label class="form-check-label" for="showNotifications">
+          Show notifications
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkboxes -->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Terms</label>
+    <div class="col-sm-9">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="terms"
+          name="terms"
+          [(ngModel)]="terms"
+          required
+        />
+        <label class="form-check-label" for="terms">
+          I agree with the terms
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <button
+        class="btn btn-primary float-end"
+        [disabled]="switchesForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>
+
+<h3>Form value</h3>
+<pre>{{ switchesForm.value | json }}</pre>
+<br />
+
+<h3>Valid</h3>
+<pre>{{ switchesForm.valid | json }}</pre>
+<br />
