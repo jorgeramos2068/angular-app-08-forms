@@ -32,6 +32,7 @@
             name="price"
             placeholder="Product price"
             required
+            min="0"
           />
           <span class="form-text text-danger" *ngIf="validatePrice()">
             It must be a price greater or equal than zero.
