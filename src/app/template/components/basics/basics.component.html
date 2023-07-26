@@ -3,11 +3,7 @@
 
 <div class="row">
   <div class="col-12">
-    <form
-      (ngSubmit)="submitProduct(productForm)"
-      #productForm="ngForm"
-      autocomplete="off"
-    >
+    <form (ngSubmit)="submitProduct()" #productForm="ngForm" autocomplete="off">
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Product</label>
         <div class="col-sm-9">
@@ -20,13 +16,7 @@
             required
             minlength="3"
           />
-          <span
-            class="form-text text-danger"
-            *ngIf="
-              productForm.controls.product?.invalid &&
-              productForm.controls.product?.touched
-            "
-          >
+          <span class="form-text text-danger" *ngIf="validateProduct()">
             It must be a 3 characters value
           </span>
         </div>
@@ -43,6 +33,9 @@
             placeholder="Product price"
             required
           />
+          <span class="form-text text-danger" *ngIf="validatePrice()">
+            It must be a price greater or equal than zero.
+          </span>
         </div>
       </div>
 
@@ -61,7 +54,11 @@
 
       <div class="row">
         <div class="col">
-          <button type="submit" class="btn btn-primary float-end">
+          <button
+            type="submit"
+            [disabled]="productForm.invalid"
+            class="btn btn-primary float-end"
+          >
             Submit
           </button>
         </div>
