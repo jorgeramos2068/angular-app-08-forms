@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { EmailValidatorService } from 'src/app/shared/validators/email-validator.service';
 import { ValidatorsService } from 'src/app/shared/validators/validators.service';
 
 @Component({
@@ -27,6 +28,7 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.pattern(this.validatorsService.emailPattern),
         ],
+        [this.emailValidator],
       ],
       username: [
         '',
@@ -42,9 +44,21 @@ export class RegisterComponent implements OnInit {
     }
   );
 
+  get emailErrorMsg(): string {
+    if (this.registerForm.get('email')?.errors?.required) {
+      return 'The email field is required.';
+    } else if (this.registerForm.get('email')?.errors?.pattern) {
+      return 'The value must be a valid email.';
+    } else if (this.registerForm.get('email')?.errors?.emailExists) {
+      return 'The email is already in use.';
+    }
+    return '';
+  }
+
   constructor(
     private formBuilder: FormBuilder,
-    private validatorsService: ValidatorsService
+    private validatorsService: ValidatorsService,
+    private emailValidator: EmailValidatorService
   ) {}
 
   ngOnInit(): void {

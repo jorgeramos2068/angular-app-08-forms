@@ -29,7 +29,7 @@
             placeholder="Email"
           />
           <span class="form-text text-danger" *ngIf="isInvalidField('email')">
-            It must be a valid email.
+            {{ emailErrorMsg }}
           </span>
         </div>
       </div>
@@ -90,7 +90,11 @@
 
       <div class="row">
         <div class="col">
-          <button type="submit" class="btn btn-primary float-end">
+          <button
+            type="submit"
+            class="btn btn-primary float-end"
+            [disabled]="registerForm.pending"
+          >
             Submit
           </button>
         </div>
