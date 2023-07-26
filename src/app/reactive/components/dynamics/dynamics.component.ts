@@ -1,24 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-dynamics',
   templateUrl: './dynamics.component.html',
 })
-export class DynamicsComponent implements OnInit {
+export class DynamicsComponent {
   public dynamicsForm: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
+    favorites: this.formBuilder.array(
+      [
+        ['Batman', Validators.required],
+        ['Superman', Validators.required],
+      ],
+      Validators.required
+    ),
   });
+
+  public newFavorite: FormControl = this.formBuilder.control(
+    '',
+    Validators.required
+  );
 
   constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  get favoritesArr() {
+    return this.dynamicsForm.get('favorites') as FormArray;
+  }
 
   isValidField(field: string): boolean {
     return <boolean>(
       (this.dynamicsForm.controls[field].errors &&
         this.dynamicsForm.controls[field].touched)
     );
+  }
+
+  addFavorite(): void {
+    if (this.newFavorite.invalid) {
+      return;
+    }
+    this.favoritesArr.push(
+      this.formBuilder.control(this.newFavorite.value, Validators.required)
+    );
+    this.newFavorite.reset();
+  }
+
+  deleteFavorite(index: number): void {
+    this.favoritesArr.removeAt(index);
   }
 
   submit(): void {
