@@ -21,6 +21,8 @@ export class SelectorPageComponent implements OnInit {
   public countries: Country[] = [];
   public borders: string[] = [];
 
+  public loading: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private countriesService: CountriesService
@@ -35,6 +37,7 @@ export class SelectorPageComponent implements OnInit {
       ?.valueChanges.pipe(
         tap((_) => {
           this.countriesForm.get('country')?.reset('');
+          this.loading = true;
         }),
         switchMap((localRegion) =>
           this.countriesService.getCountriesByRegion(localRegion)
@@ -43,6 +46,7 @@ export class SelectorPageComponent implements OnInit {
       .subscribe({
         next: (localCountries) => {
           this.countries = localCountries;
+          this.loading = false;
         },
       });
 
@@ -52,6 +56,7 @@ export class SelectorPageComponent implements OnInit {
       ?.valueChanges.pipe(
         tap((_) => {
           this.countriesForm.get('border')?.reset('');
+          this.loading = true;
         }),
         switchMap((localCountry) =>
           this.countriesService.getBordersByCountry(localCountry)
@@ -60,6 +65,7 @@ export class SelectorPageComponent implements OnInit {
       .subscribe({
         next: (localCountryWithBorder) => {
           this.borders = localCountryWithBorder.borders;
+          this.loading = false;
         },
       });
   }
