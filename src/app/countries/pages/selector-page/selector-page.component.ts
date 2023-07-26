@@ -19,7 +19,7 @@ export class SelectorPageComponent implements OnInit {
   // Selectors
   public regions: string[] = [];
   public countries: Country[] = [];
-  public borders: string[] = [];
+  public borders: Country[] = [];
 
   public loading: boolean = false;
 
@@ -60,11 +60,14 @@ export class SelectorPageComponent implements OnInit {
         }),
         switchMap((localCountry) =>
           this.countriesService.getBordersByCountry(localCountry)
+        ),
+        switchMap((localCountry) =>
+          this.countriesService.getCountriesByBorders(localCountry.borders)
         )
       )
       .subscribe({
-        next: (localCountryWithBorder) => {
-          this.borders = localCountryWithBorder.borders;
+        next: (localCountries) => {
+          this.borders = localCountries;
           this.loading = false;
         },
       });

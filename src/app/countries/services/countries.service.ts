@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { CountryWithBorders, Country } from '../interfaces/countries.interface';
+import { combineLatest, Observable, of } from 'rxjs';
+import { Country, CountryWithBorders } from '../interfaces/countries.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +35,22 @@ export class CountriesService {
     }
     const url: string = `${this.baseUrl}/alpha/${code}?fields=borders`;
     return this.http.get<CountryWithBorders>(url);
+  }
+
+  getCountryByCode(code: string): Observable<Country> {
+    const url: string = `${this.baseUrl}/alpha/${code}?fields=name, alpha3Code`;
+    return this.http.get<Country>(url);
+  }
+
+  getCountriesByBorders(borders: string[]): Observable<Country[]> {
+    if (borders.length === 0) {
+      return of([]);
+    }
+    const requests: Observable<Country>[] = [];
+    borders.map((border) => {
+      const request = this.getCountryByCode(border);
+      requests.push(request);
+    });
+    return combineLatest(requests);
   }
 }
