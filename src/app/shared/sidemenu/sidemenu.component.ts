@@ -22,4 +22,8 @@ export class SidemenuComponent {
     { text: 'Login', path: '/login' },
     { text: 'Register', path: '/register' },
   ];
+
+  public countriesMenuItems: MenuItem[] = [
+    { text: 'Selectors', path: '/countries/selectors' },
+  ];
 }
